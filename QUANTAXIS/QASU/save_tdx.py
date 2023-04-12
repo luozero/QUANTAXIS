@@ -1185,8 +1185,10 @@ def QA_SU_save_index_min(client=DATABASE, ui_log=None, ui_progress=None):
             for type in ['1min', '5min', '15min', '30min', '60min']:
                 ref_ = coll.find({'code': str(code)[0:6], 'type': type})
                 end_time = str(now_time())[0:19]
-                if ref_.count() > 0:
-                    start_time = ref_[ref_.count() - 1]['datetime']
+                if len(list(ref_)) > 0:
+                    start_time = ref_[len(list(ref_)) - 1]['datetime']
+                # if ref_.count() > 0:
+                #     start_time = ref_[ref_.count() - 1]['datetime']
 
                     QA_util_log_info(
                         '##JOB05.{} Now Saving {} from {} to {} =={} '.format(
@@ -1936,15 +1938,15 @@ def QA_SU_save_stock_block(client=DATABASE, ui_log=None, ui_progress=None):
         # )
 
         # tushare 的板块数据有中证500成分，增加获取中证500成分 ——阿财
-        coll.insert_many(
-            QA_util_to_json_from_pandas(QA_fetch_get_stock_block('tushare'))
-        )
-        QA_util_log_info(
-            'tushare Block ====',
-            ui_log=ui_log,
-            ui_progress=ui_progress,
-            ui_progress_int_value=9000
-        )
+        # coll.insert_many(
+        #     QA_util_to_json_from_pandas(QA_fetch_get_stock_block('tushare'))
+        # )
+        # QA_util_log_info(
+        #     'tushare Block ====',
+        #     ui_log=ui_log,
+        #     ui_progress=ui_progress,
+        #     ui_progress_int_value=9000
+        # )
 
         QA_util_log_info(
             '完成股票板块获取=',

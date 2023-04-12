@@ -105,6 +105,8 @@ from QUANTAXIS.QASU.save_okex import (QA_SU_save_okex, QA_SU_save_okex_1day,
                                       QA_SU_save_okex_symbol)
 from QUANTAXIS.QAUtil import (QA_Setting, QA_util_log_info,
                               QA_util_mongo_initial)
+from QUANTAXIS.QAFetch.QAStockInfo import (QA_update_stock_basic,
+                                           QA_update_industry)
 
 
 class CLI(cmd.Cmd):
@@ -493,11 +495,13 @@ class CLI(cmd.Cmd):
                     QA_Setting().client.quantaxis.user_list.insert(
                         {"username": "admin", "password": "admin"}
                     )
-                QA_ts_update_inc()
-                QA_ts_update_stock_basic()
-                QA_ts_update_namechange()
-                QA_ts_update_industry()
-                QA_ts_update_daily_basic()
+                QA_update_stock_basic()
+                QA_update_industry()
+                # QA_ts_update_inc()
+                # QA_ts_update_stock_basic()
+                # QA_ts_update_namechange()
+                # QA_ts_update_industry()
+                # QA_ts_update_daily_basic()
             elif len(arg) == 1 and arg[0] == "ts_financial":
                 if (
                     QA_Setting()
